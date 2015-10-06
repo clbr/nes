@@ -1,2 +1,4 @@
 *.o
 *.nes
+png2chr
+chr2png
