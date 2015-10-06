@@ -3,4 +3,4 @@ Nes things
 
 Various Nes tests.
 
-CC-BY license.
+CC-BY license for the demos, GPLv3 for the tools.
