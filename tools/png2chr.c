@@ -47,8 +47,8 @@ static void savechr(FILE *f, const u8 * const data, const u32 w, const u32 h) {
 
 int main(int argc, char **argv) {
 
-	if (argc != 2) {
-		die("Usage: %s file.png\n", argv[0]);
+	if (argc < 2) {
+		die("Usage: %s file.png [file.chr]\n", argv[0]);
 	}
 
 	FILE *f = fopen(argv[1], "r");
@@ -63,9 +63,11 @@ int main(int argc, char **argv) {
 	outname[namelen - 2] = 'h';
 	outname[namelen - 3] = 'c';
 
-	FILE *out = fopen(outname, "w");
+	const char * const outptr = argc > 2 ? argv[2] : outname;
+
+	FILE *out = fopen(outptr, "w");
 	if (!out)
-		die("Can't open output file '%s'\n", outname);
+		die("Can't open output file '%s'\n", outptr);
 
 	png_structp png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING,NULL,NULL,NULL);
 	if (!png_ptr) die("PNG error\n");

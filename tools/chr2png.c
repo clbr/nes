@@ -113,8 +113,8 @@ static void savepng(FILE *f, const u8 * const data, const u32 tiles) {
 
 int main(int argc, char **argv) {
 
-	if (argc != 2) {
-		printf("Usage: %s file.png\n", argv[0]);
+	if (argc < 2) {
+		printf("Usage: %s file.chr [file.png]\n", argv[0]);
 		return 1;
 	}
 
@@ -130,9 +130,11 @@ int main(int argc, char **argv) {
 	outname[namelen - 2] = 'n';
 	outname[namelen - 3] = 'p';
 
-	FILE *out = fopen(outname, "w");
+	const char * const outptr = argc > 2 ? argv[2] : outname;
+
+	FILE *out = fopen(outptr, "w");
 	if (!out)
-		die("Can't open output file '%s'\n", outname);
+		die("Can't open output file '%s'\n", outptr);
 
 	struct stat st;
 	fstat(fileno(f), &st);
