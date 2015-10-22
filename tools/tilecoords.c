@@ -139,6 +139,7 @@ int main(int argc, char **argv) {
 		for (k = 0; k < numtiles; k++) {
 			if (!memcmp(curtile, tiles[k].data, 64)) {
 				found = 1;
+				if (k > 256) k -= 256;
 				printf("0x%02x ", k);
 				break;
 			}
