@@ -53,16 +53,13 @@ static void fill() {
 	ppu_on_all();
 }
 
-static void screena() {
+static void bankswitch(const u8 to) {
 
-	static const u8 dummy = 0;
-	(u8) dummy = 0;
-}
+	static const u8 arr[] = {
+		0, 1, 2, 3, 4
+	};
 
-static void screenb() {
-
-	static const u8 dummy = 1;
-	(u8) dummy = 1;
+	(u8) arr[to] = to;
 }
 
 int main() {
@@ -78,12 +75,10 @@ int main() {
 		ctrl = joy_read(0);
 
 		if (ctrl & KEY_START && !(prevctrl & KEY_START)) {
-			state ^= 1;
+			state++;
+			state %= 5;
 
-			if (state)
-				screenb();
-			else
-				screena();
+			bankswitch(state);
 		}
 
 		ppu_wait_nmi();

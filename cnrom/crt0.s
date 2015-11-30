@@ -267,5 +267,11 @@ sounds_data:
         .incbin        "tiles.chr"
 .segment "CHARS2"
         .incbin        "tiles2.chr"
+.segment "CHARS3"
+        .incbin        "tiles3.chr"
+.segment "CHARS4"
+        .incbin        "tiles4.chr"
+.segment "CHARS5"
+        .incbin        "tiles5.chr"
 
 
