@@ -19,10 +19,12 @@ int main() {
 	const u32 expected = 0x4f0f97e;
 	u32 sum = 0;
 	u16 blanks = 0;
+	u8 i = 0;
 	// Zero the timer out
 	*(u16 *) 0x6b = 0;
 
 	// Decompress
+	for (i = 0; i < 64; i++)
 
 	blanks = clock();
 
