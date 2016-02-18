@@ -32,8 +32,8 @@ while read sum name; do
 	prevsum=$sum
 done < $dir/sums
 
-montage -geometry +0+0 -background black -tile 16x $dir/*bmp $out
-mifcon -indexed $out
+montage -geometry +0+0 -background black -tile 16x $dir/*bmp PNG8:$out
+#mifcon -indexed $out
 pngreorder -s $in $out
 
 file $out
