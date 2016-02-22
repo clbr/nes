@@ -64,6 +64,7 @@ struct tile_t {
 int main(int argc, char **argv) {
 
 	u8 retval = 0;
+	const char *nones = getenv("nones");
 
 	if (argc < 3) {
 		die("Usage: %s tilemap.png sprite.png\n", argv[0]);
@@ -139,7 +140,7 @@ int main(int argc, char **argv) {
 		for (k = 0; k < numtiles; k++) {
 			if (!memcmp(curtile, tiles[k].data, 64)) {
 				found = 1;
-				if (k >= 256) k -= 256;
+				if (k >= 256 && !nones) k -= 256;
 				printf("0x%02x ", k);
 				break;
 			}
