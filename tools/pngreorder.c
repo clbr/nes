@@ -6,6 +6,7 @@
 #include "common.h"
 
 static png_color srcpal[16];
+static u8 numsrc;
 
 static void readsrc(const char in[]) {
 
@@ -43,6 +44,8 @@ static void readsrc(const char in[]) {
 	for (i = 0; i < max; i++) {
 		memcpy(&srcpal[i], &ptr[i], sizeof(png_color));
 	}
+
+	numsrc = max;
 
 	fclose(f);
 	png_destroy_info_struct(png_ptr, &info);
@@ -113,7 +116,7 @@ static void remap(const char in[], const u8 offset) {
 		u8 found;
 		for (i = 0; i < max; i++) {
 			found = 0;
-			for (j = 0; j < max; j++) {
+			for (j = 0; j < numsrc; j++) {
 				if (equal(srcpal[j], inpal[i])) {
 					found = 1;
 					break;
