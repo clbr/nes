@@ -83,6 +83,10 @@ static void remap(const char in[], const u8 offset) {
 	int num;
 	png_color *ptr;
 	png_get_PLTE(png_ptr, info, &ptr, &num);
+
+	if (num > 16 && !offset)
+		die("Image %s has %u colors, not able to remap\n", in, num);
+
 	const u32 max = num < 16 ? num : 16;
 
 	png_color inpal[16];
