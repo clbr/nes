@@ -2,7 +2,7 @@ CFLAGS += -Wall -Wextra
 LDFLAGS += -Wl,-as-needed -Wl,-O1
 
 .phony: all clean
-all: png2chr chr2png sametiles tilecoords nes2hex pngreorder png2gba palstat
+all: png2chr chr2png sametiles tilecoords nes2hex pngreorder png2gba palstat coord2metaspite
 
 png2chr: png2chr.o common.o
 	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS) -lpng
@@ -28,5 +28,8 @@ pngreorder: pngreorder.o common.o
 palstat: palstat.o common.o
 	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS) -lpng
 
+coord2metaspite: coord2metaspite.o common.o
+
 clean:
-	rm -f *.o png2chr chr2png sametiles tilecoords nes2hex pngreorder png2gba palstat
+	rm -f *.o png2chr chr2png sametiles tilecoords nes2hex pngreorder png2gba palstat \
+		coord2metaspite
