@@ -32,7 +32,7 @@ int main(int argc, char **argv) {
 		y++;
 	}
 
-	printf("};\n");
+	printf("128\n};\n");
 
 	return 0;
 }
