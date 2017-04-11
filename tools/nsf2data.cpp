@@ -1,4 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
+#define _SYS_WAIT_H_ // define this to avoid conflicts with wait.h
 
 #include <stdlib.h>
 #include <stdio.h>
