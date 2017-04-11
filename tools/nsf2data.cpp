@@ -314,10 +314,10 @@ int main(int argc,char *argv[])
 
 	for(i=1;i<argc;++i)
 	{
-		if(!_stricmp(argv[i],"-ca65")) outtype=OUT_CA65;
-		if(!_stricmp(argv[i],"-asm6")) outtype=OUT_ASM6;
-		if(!_stricmp(argv[i],"-pal"))  { pal=true;  ntsc=false; }
-		if(!_stricmp(argv[i],"-ntsc")) { pal=false; ntsc=true; }
+		if(!strcmp(argv[i],"-ca65")) outtype=OUT_CA65;
+		if(!strcmp(argv[i],"-asm6")) outtype=OUT_ASM6;
+		if(!strcmp(argv[i],"-pal"))  { pal=true;  ntsc=false; }
+		if(!strcmp(argv[i],"-ntsc")) { pal=false; ntsc=true; }
 	}
 
 	printf("Output format: ");

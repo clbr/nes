@@ -2155,14 +2155,14 @@ int main(int argc,char *argv[])
 
 	for(i=1;i<argc;++i)
 	{
-		if(!_stricmp(argv[i],"-ca65")) outtype=OUT_CA65;
-		if(!_stricmp(argv[i],"-asm6")) outtype=OUT_ASM6;
-		if(!_stricmp(argv[i],"-ch5"))  channels=5;
-		if(!_stricmp(argv[i],"-ch4"))  channels=4;
-		if(!_stricmp(argv[i],"-ch3"))  channels=3;
-		if(!_stricmp(argv[i],"-ch2"))  channels=2;
-		if(!_stricmp(argv[i],"-ch1"))  channels=1;
-		if(!_stricmp(argv[i],"-s"))    separate=true;
+		if(!strcmp(argv[i],"-ca65")) outtype=OUT_CA65;
+		if(!strcmp(argv[i],"-asm6")) outtype=OUT_ASM6;
+		if(!strcmp(argv[i],"-ch5"))  channels=5;
+		if(!strcmp(argv[i],"-ch4"))  channels=4;
+		if(!strcmp(argv[i],"-ch3"))  channels=3;
+		if(!strcmp(argv[i],"-ch2"))  channels=2;
+		if(!strcmp(argv[i],"-ch1"))  channels=1;
+		if(!strcmp(argv[i],"-s"))    separate=true;
 
 		if(argv[i][0]!='-') strcpy(inname,argv[i]);
 	}
