@@ -451,8 +451,8 @@ void parse_instruments_old(void)
 	const char *seqTypeSection[4]={"[SequencesVolume]","[SequencesArpeggio]","[SequencesPitch]","[SequencesDuty]"};
 	const char *seqTypeName[4]={"SequenceVolume","SequenceArpeggio","SequencePitch","SequenceDuty"};
 	char str[128];
-	int i,j,n,id,off,ptr,cnt,pos,type,ins,soff,doff,dsize,val,size,ins_id;
-	envelopeStruct *env;
+	int i,j,n,id,off,ptr,cnt,pos,type,ins,soff,doff,dsize,val = 0,size,ins_id;
+	envelopeStruct *env = NULL;
 	dpcmEntryStruct dpcm_list[64];
 
 	subSongsCount=1;//old text format does not support multisong
@@ -1082,7 +1082,7 @@ void parse_song(int subsong,bool header_only)
 	static int order[MAX_ORDER][5];
 
 	char str[128];
-	int i,n,row,pos,off,ptn,chn,note,ins,maxptn,off_prev;
+	int i,n,row,pos,off,ptn,chn = 0,note,ins,maxptn,off_prev;
 	channelStruct *nsrc,*ndst;
 
 	if(subsong>=subSongsCount) parse_error(0,"No sub song found");
@@ -1308,7 +1308,7 @@ void parse_song(int subsong,bool header_only)
 
 void song_cleanup_instrument_numbers(void)
 {
-	int chn,pos,row,ins,speed;
+	int chn,pos,row,ins,speed = 0;
 	channelStruct *ch;
 	int insloop[5];
 	bool stop;
@@ -1449,7 +1449,7 @@ void song_text_dump(songStruct *s)
 	const char *noteNames[12]={"C-","C#","D-","D#","E-","F-","F#","G-","G#","A-","A#","B-"};
 	const char *typeNames[4]={"volume","arpeggio","pitch","duty"};
 	int i,j,k,type,note,instrument;
-	envelopeStruct *env;
+	envelopeStruct *env = NULL;
 	rowStruct *row;
 
 	//general settings
