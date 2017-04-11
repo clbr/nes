@@ -300,7 +300,7 @@ cpuStruct CPU;
 
 //ðàçíûå îïåðàöèè
 
-#define BRK()		{ CPU.jam; }//adr.hl=PCW+2; PUSH(adr.h); PUSH(adr.l); PR|=FLG_B; PUSH(PR); PCW++; }
+#define BRK()		{ CPU.jam=true; }//adr.hl=PCW+2; PUSH(adr.h); PUSH(adr.l); PR|=FLG_B; PUSH(PR); PCW++; }
 #define NOP()		{ PCW++; }
 
 //íåäîêóìåíòèðîâàííûå îïåðàöèè - ðàçíûå
