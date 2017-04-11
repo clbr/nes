@@ -1,4 +1,6 @@
 CFLAGS += -Wall -Wextra
+CXXFLAGS += -Wall -Wextra
+CXXFLAGS += -fno-exceptions -fno-rtti
 LDFLAGS += -Wl,-as-needed -Wl,-O1
 
 .phony: all clean
@@ -31,13 +33,13 @@ palstat: palstat.o common.o
 coord2metasprite: coord2metasprite.o common.o
 
 nesasmc: nesasmc.o
-	$(CXX) -o $@ $^ $(CFLAGS)
+	$(CXX) -o $@ $^ $(CXXFLAGS)
 
 nsf2data: nsf2data.o
-	$(CXX) -o $@ $^ $(CFLAGS)
+	$(CXX) -o $@ $^ $(CXXFLAGS)
 
 text2data: text2data.o
-	$(CXX) -o $@ $^ $(CFLAGS)
+	$(CXX) -o $@ $^ $(CXXFLAGS)
 
 clean:
 	rm -f *.o png2chr chr2png sametiles tilecoords nes2hex pngreorder png2gba palstat \
