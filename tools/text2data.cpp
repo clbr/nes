@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include <conio.h>
 #include <memory.h>
 
 
@@ -2126,7 +2125,6 @@ int process_and_output_song(int sub)
 
 void exit_proc(void)
 {
-	//_getch();
 	text_close();
 	output_close();
 }
