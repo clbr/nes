@@ -4,4 +4,4 @@ zlib	| 0.527	| 6.4	| zlib, requires 0.7kb RAM -> not usable without extra RAM
 lzo	| 0.666	| 2.8	| GPL, no RAM required
 lz5hc	| 0.688	| 2.5	| BSD, no RAM required
 fastlz	| 0.725	| 3.9	| MIT, no RAM required
-lz4hc	| 0.731	| 5.8	| BSD, no RAM required
+lz4hc	| 0.731	| 5.8	| BSD, no RAM required - optimized asm is 39.5kb/s
