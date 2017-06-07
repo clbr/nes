@@ -57,6 +57,9 @@ int main() {
 			printf(" ");
 	}
 
+	free(comp);
+	free(uncomp);
+
 	printf("};\n");
 	return 0;
 }
