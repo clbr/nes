@@ -39,7 +39,7 @@ int main() {
 	cprintf("expected %lx", expected);
 
 	while (1) {
-		waitvblank();
+		waitvsync();
 	}
 
 	return 0;
