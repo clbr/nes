@@ -72,6 +72,15 @@ static void vertflip(const struct tile_t * const src, struct tile_t * const dst)
 	}
 }
 
+static void spacer(const u32 i, const u32 perrow, const char * const flips) {
+	if (i % perrow != perrow - 1) {
+		if (flips)
+			printf(", ");
+		else
+			printf(" ");
+	}
+}
+
 int main(int argc, char **argv) {
 
 	u8 retval = 0;
@@ -166,29 +175,25 @@ int main(int argc, char **argv) {
 				found = 1;
 				if (k >= 256 && !nones) k -= 256;
 				printf("0x%02x", k);
-				if (i % perrow != perrow - 1)
-					printf(" ");
+				spacer(i, perrow, flips);
 				break;
 			} else if (flips && !memcmp(curtile, flipv[k].data, 64)) {
 				found = 1;
 				if (k >= 256 && !nones) k -= 256;
 				printf("0x%02x|FLIPV", k);
-				if (i % perrow != perrow - 1)
-					printf(" ");
+				spacer(i, perrow, flips);
 				break;
 			} else if (flips && !memcmp(curtile, fliph[k].data, 64)) {
 				found = 1;
 				if (k >= 256 && !nones) k -= 256;
 				printf("0x%02x|FLIPH", k);
-				if (i % perrow != perrow - 1)
-					printf(" ");
+				spacer(i, perrow, flips);
 				break;
 			} else if (flips && !memcmp(curtile, fliphv[k].data, 64)) {
 				found = 1;
 				if (k >= 256 && !nones) k -= 256;
 				printf("0x%02x|FLIPH|FLIPV", k);
-				if (i % perrow != perrow - 1)
-					printf(" ");
+				spacer(i, perrow, flips);
 				break;
 			}
 		}
@@ -198,8 +203,12 @@ int main(int argc, char **argv) {
 			retval = 1;
 		}
 
-		if (i % perrow == perrow - 1)
-			puts("");
+		if (i % perrow == perrow - 1) {
+			if (flips)
+				puts(",");
+			else
+				puts("");
+		}
 	}
 
 	free(tilemap);
