@@ -56,16 +56,34 @@ struct tile_t {
 	u8 data[64];
 };
 
+static void horzflip(const struct tile_t * const src, struct tile_t * const dst) {
+	u8 i, x;
+	for (i = 0; i < 8; i++) {
+		for (x = 0; x < 8; x++) {
+			dst->data[i * 8 + x] = src->data[i * 8 + (7 - x)];
+		}
+	}
+}
+
+static void vertflip(const struct tile_t * const src, struct tile_t * const dst) {
+	u8 i;
+	for (i = 0; i < 8; i++) {
+		memcpy(&dst->data[(7 - i) * 8], &src->data[i * 8], 8);
+	}
+}
+
 int main(int argc, char **argv) {
 
 	u8 retval = 0;
 	const char *nones = getenv("nones");
+	const char *flips = getenv("flips");
 
 	if (argc < 3) {
 		die("Usage: %s tilemap.png sprite.png\n", argv[0]);
 	}
 
 	u8 *tilemap, *img;
+	struct tile_t *flipv = NULL, *fliph = NULL, *fliphv = NULL;
 	u32 tilew, tileh, imgw, imgh, x, y;
 
 	loadpng(argv[1], &tilemap, &tilew, &tileh);
@@ -99,6 +117,19 @@ int main(int argc, char **argv) {
 			printf("%u ", tiles[i].data[k]);
 			if (k % 8 == 7) puts("");
 		}*/
+	}
+
+	// Make flipped copies for checks
+	if (flips) {
+		flipv = calloc(numtiles, sizeof(struct tile_t));
+		fliph = calloc(numtiles, sizeof(struct tile_t));
+		fliphv = calloc(numtiles, sizeof(struct tile_t));
+
+		for (i = 0; i < numtiles; i++) {
+			horzflip(&tiles[i], &fliph[i]);
+			vertflip(&tiles[i], &flipv[i]);
+			vertflip(&fliph[i], &fliphv[i]);
+		}
 	}
 
 	// For each tile in img, find its number in tilemap.
@@ -138,6 +169,27 @@ int main(int argc, char **argv) {
 				if (i % perrow != perrow - 1)
 					printf(" ");
 				break;
+			} else if (flips && !memcmp(curtile, flipv[k].data, 64)) {
+				found = 1;
+				if (k >= 256 && !nones) k -= 256;
+				printf("0x%02x|FLIPV", k);
+				if (i % perrow != perrow - 1)
+					printf(" ");
+				break;
+			} else if (flips && !memcmp(curtile, fliph[k].data, 64)) {
+				found = 1;
+				if (k >= 256 && !nones) k -= 256;
+				printf("0x%02x|FLIPH", k);
+				if (i % perrow != perrow - 1)
+					printf(" ");
+				break;
+			} else if (flips && !memcmp(curtile, fliphv[k].data, 64)) {
+				found = 1;
+				if (k >= 256 && !nones) k -= 256;
+				printf("0x%02x|FLIPH|FLIPV", k);
+				if (i % perrow != perrow - 1)
+					printf(" ");
+				break;
 			}
 		}
 
@@ -153,5 +205,8 @@ int main(int argc, char **argv) {
 	free(tilemap);
 	free(img);
 	free(tiles);
+	free(flipv);
+	free(fliph);
+	free(fliphv);
 	return retval;
 }
