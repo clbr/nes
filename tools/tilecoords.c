@@ -141,7 +141,9 @@ int main(int argc, char **argv) {
 			if (!memcmp(curtile, tiles[k].data, 64)) {
 				found = 1;
 				if (k >= 256 && !nones) k -= 256;
-				printf("0x%02x ", k);
+				printf("0x%02x", k);
+				if (i % perrow != perrow - 1)
+					printf(" ");
 				break;
 			}
 		}
