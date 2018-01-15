@@ -1,11 +1,6 @@
 #include <png.h>
 #include "common.h"
 
-static u8 pixel(const u8 * const data, const u32 x, const u32 y, const u32 w) {
-
-	return data[y * w + x];
-}
-
 static void loadpng(const char name[], u8 **outdata, u32 *w, u32 *h) {
 
 	FILE *f = fopen(name, "r");
@@ -87,17 +82,16 @@ int main(int argc, char **argv) {
 
 		y *= 8;
 
-		const u32 endx = x + 8;
 		const u32 endy = y + 8;
 		const u32 starty = y;
 
 		u8 pix = 0;
-		for (; x < endx; x++) {
-			for (y = starty; y < endy; y++) {
-				tiles[i].data[pix++] = pixel(tilemap, x, y, tilew);
-			}
+		for (y = starty; y < endy; y++) {
+			memcpy(tiles[i].data + pix * 8,
+				tilemap + y * tilew + x, 8);
+			pix++;
 		}
-		if (pix != 64) die("BUG, pix %u\n", pix);
+		if (pix != 8) die("BUG, pix %u\n", pix);
 
 /*		printf("Read tile %u:\n", i);
 		u32 k;
@@ -117,18 +111,17 @@ int main(int argc, char **argv) {
 
 		y *= 8;
 
-		const u32 endx = x + 8;
 		const u32 endy = y + 8;
 		const u32 starty = y;
 
 		u8 pix = 0;
 		u32 k;
-		for (; x < endx; x++) {
-			for (y = starty; y < endy; y++) {
-				curtile[pix++] = pixel(img, x, y, imgw);
-			}
+		for (y = starty; y < endy; y++) {
+			memcpy(&curtile[pix * 8],
+				img + y * imgw + x, 8);
+			pix++;
 		}
-		if (pix != 64) die("BUG, pix %u\n", pix);
+		if (pix != 8) die("BUG, pix %u\n", pix);
 
 /*		puts("Looking for tile:");
 		for (k = 0; k < 64; k++) {
