@@ -6,7 +6,7 @@ LDFLAGS += -Wl,-as-needed -Wl,-O1
 .phony: all clean
 all: png2chr chr2png sametiles tilecoords nes2hex pngreorder png2gba \
 	palstat coord2metasprite nesasmc nsf2data text2data \
-	coord2lz4
+	coord2lz4 coord2bin
 
 png2chr: png2chr.o common.o
 	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS) -lpng
@@ -33,6 +33,8 @@ palstat: palstat.o common.o
 	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS) -lpng
 
 coord2metasprite: coord2metasprite.o common.o
+
+coord2bin: coord2bin.o common.o
 
 nesasmc: nesasmc.o
 	$(CXX) -o $@ $^ $(CXXFLAGS)
