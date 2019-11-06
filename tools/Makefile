@@ -6,7 +6,7 @@ LDFLAGS += -Wl,-as-needed -Wl,-O1
 .phony: all clean
 all: png2chr chr2png sametiles tilecoords nes2hex pngreorder png2gba \
 	palstat coord2metasprite nesasmc nsf2data text2data \
-	coord2lz4 coord2bin
+	coord2lz4 coord2bin mode7interleave
 
 png2chr: png2chr.o common.o
 	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS) -lpng
@@ -36,6 +36,8 @@ coord2metasprite: coord2metasprite.o common.o
 
 coord2bin: coord2bin.o common.o
 
+mode7interleave: mode7interleave.o common.o
+
 nesasmc: nesasmc.o
 	$(CXX) -o $@ $^ $(CXXFLAGS)
 
@@ -49,4 +51,5 @@ coord2lz4: coord2lz4.o common.o lz4hc.o lz4.o
 
 clean:
 	rm -f *.o png2chr chr2png sametiles tilecoords nes2hex pngreorder png2gba palstat \
-		coord2metasprite nesasmc nsf2data text2data coord2lz4
+		coord2metasprite nesasmc nsf2data text2data coord2lz4 coord2bin \
+		mode7interleave
