@@ -3,10 +3,12 @@ CXXFLAGS += -Wall -Wextra
 CXXFLAGS += -fno-exceptions -fno-rtti
 LDFLAGS += -Wl,-as-needed -Wl,-O1
 
-.phony: all clean
-all: png2chr chr2png sametiles tilecoords nes2hex pngreorder png2gba \
+BINS = png2chr chr2png sametiles tilecoords nes2hex pngreorder png2gba \
 	palstat coord2metasprite nesasmc nsf2data text2data \
 	coord2lz4 coord2bin mode7interleave
+
+.phony: all clean
+all: $(BINS)
 
 png2chr: png2chr.o common.o
 	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS) -lpng
@@ -50,6 +52,4 @@ text2data: text2data.o
 coord2lz4: coord2lz4.o common.o lz4hc.o lz4.o
 
 clean:
-	rm -f *.o png2chr chr2png sametiles tilecoords nes2hex pngreorder png2gba palstat \
-		coord2metasprite nesasmc nsf2data text2data coord2lz4 coord2bin \
-		mode7interleave
+	rm -f *.o $(BINS)
