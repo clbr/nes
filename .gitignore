@@ -15,3 +15,4 @@ text2data
 coord2lz4
 coord2bin
 mode7interleave
+cc65lz4
