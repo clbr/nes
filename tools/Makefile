@@ -5,7 +5,8 @@ LDFLAGS += -Wl,-as-needed -Wl,-O1
 
 BINS = png2chr chr2png sametiles tilecoords nes2hex pngreorder png2gba \
 	palstat coord2metasprite nesasmc nsf2data text2data \
-	coord2lz4 coord2bin mode7interleave cc65lz4 png2tilebit
+	coord2lz4 coord2bin mode7interleave cc65lz4 png2tilebit \
+	tilecoords16
 
 .phony: all clean
 all: $(BINS)
@@ -23,6 +24,9 @@ sametiles: sametiles.o common.o
 	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS) -lpng
 
 tilecoords: tilecoords.o common.o
+	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS) -lpng
+
+tilecoords16: tilecoords16.o common.o
 	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS) -lpng
 
 nes2hex: nes2hex.o common.o
