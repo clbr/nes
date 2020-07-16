@@ -84,6 +84,15 @@ static void spacer(const u32 i, const u32 perrow, const char * const flips) {
 	}
 }
 
+static u32 trans(const u32 in) {
+	// Translate the tile number to 8px coords
+	#define NUM_PER_ROW (128 / SIDE)
+	const u32 x = in % NUM_PER_ROW;
+	const u32 y = in / NUM_PER_ROW;
+
+	return y * 2 * 16 + x * 2;
+}
+
 int main(int argc, char **argv) {
 
 	u8 retval = 0;
@@ -175,22 +184,22 @@ int main(int argc, char **argv) {
 		for (k = 0; k < numtiles; k++) {
 			if (!memcmp(curtile, tiles[k].data, AREA)) {
 				found = 1;
-				printf("0x%02x", k);
+				printf("0x%02x", trans(k));
 				spacer(i, perrow, flips);
 				break;
 			} else if (flips && !memcmp(curtile, flipv[k].data, AREA)) {
 				found = 1;
-				printf("0x%02x|FLIPV", k);
+				printf("0x%02x|FLIPV", trans(k));
 				spacer(i, perrow, flips);
 				break;
 			} else if (flips && !memcmp(curtile, fliph[k].data, AREA)) {
 				found = 1;
-				printf("0x%02x|FLIPH", k);
+				printf("0x%02x|FLIPH", trans(k));
 				spacer(i, perrow, flips);
 				break;
 			} else if (flips && !memcmp(curtile, fliphv[k].data, AREA)) {
 				found = 1;
-				printf("0x%02x|FLIPH|FLIPV", k);
+				printf("0x%02x|FLIPH|FLIPV", trans(k));
 				spacer(i, perrow, flips);
 				break;
 			}
