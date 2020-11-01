@@ -19,3 +19,4 @@ coord2bin
 mode7interleave
 cc65lz4
 png2tilebit
+png2n64
