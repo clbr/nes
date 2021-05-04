@@ -74,7 +74,7 @@ int main() {
 	while (1) {
 		ctrl = joy_read(0);
 
-		if (ctrl & KEY_START && !(prevctrl & KEY_START)) {
+		if (JOY_START(ctrl) && !JOY_START(prevctrl)) {
 			state++;
 			state %= 5;
 
