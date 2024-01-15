@@ -69,13 +69,13 @@ int main() {
 		prevy = y;
 		prevx = x;
 
-		if (a & KEY_LEFT && x)
+		if (a & PAD_LEFT && x)
 			x--;
-		if (a & KEY_RIGHT && x < 31)
+		if (a & PAD_RIGHT && x < 31)
 			x++;
-		if (a & KEY_UP && y > 1)
+		if (a & PAD_UP && y > 1)
 			y--;
-		if (a & KEY_DOWN && y < 28)
+		if (a & PAD_DOWN && y < 28)
 			y++;
 	}
 

@@ -17,14 +17,14 @@ int main() {
 		gotoy(0);
 
 		cprintf("Keys: %s%s%s%s%s%s%s%s                           ",
-			a & KEY_UP ? "up " : "",
-			a & KEY_DOWN ? "down " : "",
-			a & KEY_LEFT ? "left " : "",
-			a & KEY_RIGHT ? "right " : "",
-			a & KEY_A ? "A " : "",
-			a & KEY_B ? "B " : "",
-			a & KEY_SELECT ? "select " : "",
-			a & KEY_START ? "start " : "");
+			a & PAD_UP ? "up " : "",
+			a & PAD_DOWN ? "down " : "",
+			a & PAD_LEFT ? "left " : "",
+			a & PAD_RIGHT ? "right " : "",
+			a & PAD_A ? "A " : "",
+			a & PAD_B ? "B " : "",
+			a & PAD_SELECT ? "select " : "",
+			a & PAD_START ? "start " : "");
 	}
 
 	return 0;
