@@ -20,3 +20,4 @@ mode7interleave
 cc65lz4
 png2tilebit
 png2n64
+coord2png
