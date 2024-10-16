@@ -257,6 +257,11 @@ int text_find_tag(const char *tag,int off)
 {
 	int i;
 
+	if (off < 0) {
+		printf("Bug somewhere?\n");
+		return -1;
+	}
+
 	for(i=off;i<text_size-(int)strlen(tag);++i)
 	{
 		if(!memcmp(&text_src[i],tag,strlen(tag))) return text_skip_spaces(i+strlen(tag));
@@ -897,6 +902,7 @@ void parse_instruments(void)
 			env->loop=loop;
 		}
 	}
+	off = 0;
 
 	//parse instruments
 
@@ -1012,7 +1018,7 @@ void parse_instruments(void)
 
 	off=text_find_tag("# DPCM samples",off);
 
-	while(off<text_size)
+	while(off >= 0 && off<text_size)
 	{
 		off=text_find_tag("DPCMDEF",off);
 
