@@ -2032,6 +2032,7 @@ int output_song(int sub,int spdchn,bool test)
 void output_close(void)
 {
 	if(outfile) fclose(outfile);
+	outfile = NULL;
 }
 
 
